@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.855);
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    width: 390px;
+    height: 540px;
+
+    padding: 20px;
+
+    background-color: rgba(241, 241, 241, 0.775);
+    border-radius: 15px;
+}
+
+.cart {
+    width: 350px;
+    height: 500px;
+
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 10px;
+}
+
+.cart img {
+    width: 350px;
+    height: 500px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+    display: block;
+}
+
+.cart h2 {
+    position: absolute;
+
+    left: 0;
+    bottom: 15px;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 30px;
+    color: white;
+
+    z-index: 2;
+}
+
+.cart i {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+    font-size: 90px;
+    /* background: linear-gradient(red,rgb(255, 192, 192)); */
+    color: rgba(215, 14, 212, 0.805);
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+
+/* =========================
+   SMOOTH INSTAGRAM LIKE
+   ========================= */
+
+.cart i.show {
+    animation: instaLike 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+@keyframes instaLike {
+
+    /* Start - very small */
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
+
+    /* Fast pop */
+    12% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(0.75);
+    }
+
+    /* Big pop */
+    25% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1.35);
+    }
+
+    /* Smooth overshoot */
+    34% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1.1);
+    }
+
+    /* Settle */
+    43% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    /* Start moving upward */
+    55% {
+        opacity: 0.95;
+        transform:
+            translate(-50%, -75%)
+            scale(0.95);
+    }
+
+    /* Smooth upward movement */
+    70% {
+        opacity: 0.75;
+        transform:
+            translate(-50%, -125%)
+            scale(0.85);
+    }
+
+    /* Continue upward */
+    85% {
+        opacity: 0.4;
+        transform:
+            translate(-50%, -175%)
+            scale(0.7);
+    }
+
+    /* Finish */
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -220%)
+            scale(0.55);
+    }
+}

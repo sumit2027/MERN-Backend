@@ -1,0 +1,33 @@
+$box-size: 300px;
+$box-color: #3498db;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #111;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .box {
+        width: $box-size;
+        height: $box-size;
+
+        background: $box-color;
+        border-radius: 20px;
+
+        transition: all 0.4s ease;
+
+        &:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: #e74c3c;
+            border-radius: 50%;
+        }
+    }
+}
