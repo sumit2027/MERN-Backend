@@ -14,6 +14,13 @@ app.get('/',function(req,res){
     res.render("index");
 })
 
+app.get('/profile/:username',function(req,res){
+    res.send(`Welcome ${req.params.username}`)
+})
+app.get('/auther/:username/:age',function(req,res){
+    res.send(`Welcome ${req.params.username} of age ${req.params.age}`)
+})
+
 app.listen(3000,function(){
     console.log("its running...");
 }) 
