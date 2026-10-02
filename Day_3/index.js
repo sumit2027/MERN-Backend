@@ -5,7 +5,7 @@ const fs = require('fs');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
-app.use(express.urlencoded({extends:true}));
+app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,"public")));
 
 app.get('/',function(req,res){
@@ -14,12 +14,50 @@ app.get('/',function(req,res){
     });
     
 })
+// app.get('/file/:filename',function(req,res){ 
+//     fs.readFile(`./files/${req.params.filename}`,"utf-8",function(err,filedata){
+//         res.render('show',{filename:req.params.filename,filedata:filedata})
+        
+//     })   
+// })
 
-app.post('/create',function(req,res){
-    fs.writeFile(`./files/${req.body.title.split(' ').join('')}.txt`,req.body.details,function(err){
-        res.redirect('/')
+// app.post('/create',function(req,res){
+//     fs.writeFile(`./files/${req.body.title.split(' ').join('')}.txt`,req.body.details,function(err){
+//         res.redirect('/')
+//     });
+// })
+
+app.get('/file/:filename', function(req, res) {
+    fs.readFile(`./files/${req.params.filename}`, 'utf-8', function(err, filedata) {
+        if (err) {
+            console.log("Read error:", err);
+            return res.status(404).send("File not found");
+        }
+
+        console.log("File data:", JSON.stringify(filedata));
+
+        res.render('show', {
+            filename: req.params.filename,
+            filedata: filedata
+        });
     });
-})
+});
+
+app.post('/create', function(req, res) {
+    const filename = req.body.title.split(' ').join('') + '.txt';
+
+    fs.writeFile(`./files/${filename}`, req.body.details, function(err) {
+        if (err) {
+            console.log("Write error:", err);
+            return res.status(500).send("File not saved");
+        }
+
+        console.log("File saved:", filename);
+        console.log("Saved content:", req.body.details);
+
+        res.redirect('/');
+    });
+});
 
 app.listen(3000,function(){
     console.log("Server is running...");
