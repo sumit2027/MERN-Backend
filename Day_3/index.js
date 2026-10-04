@@ -43,6 +43,33 @@ app.get('/file/:filename', function(req, res) {
     });
 });
 
+app.get('/edit/:filename',function(req,res){
+    res.render('edit',{filename:req.params.filename});
+})
+
+// app.post('/edit',function(req,res){
+//     fs.rename(`./files/${req.body.previous}`,`./files/${req.body.new}`,function(err){
+//         res.redirect('/');
+//     })  
+// })
+
+app.post('/edit', function(req, res) {
+    const { previous, name } = req.body;
+
+    fs.rename(
+        `./files/${previous}`,
+        `./files/${name}`,
+        function(err) {
+            if (err) {
+                return res.status(500).send(err.message);
+            }
+
+            res.redirect('/');
+        }
+    );
+});
+
+
 app.post('/create', function(req, res) {
     const filename = req.body.title.split(' ').join('') + '.txt';
 
@@ -58,6 +85,7 @@ app.post('/create', function(req, res) {
         res.redirect('/');
     });
 });
+
 
 app.listen(3000,function(){
     console.log("Server is running...");
