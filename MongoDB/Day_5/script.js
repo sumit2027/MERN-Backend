@@ -1,0 +1,13 @@
+const para = document.querySelector("p");
+const charters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const text = para.innerText;
+para.addEventListener("mouseenter", () => {
+
+  setInterval(() => {
+  const str = text.split('').map((char,index) => {
+    return charters.split("") [Math.floor(Math.random()*52)]
+  }).join("")
+  para.innerText = str
+},100)
+  
+});
